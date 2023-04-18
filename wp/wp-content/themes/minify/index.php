@@ -10,5 +10,5 @@
  */
 
 /* Redirect browser */
-header("Location: http://localhost:8000");
+header("Location: http://localhost:8080");
 exit;
