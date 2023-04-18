@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <Navbar />
+    <Hero />
   </div>
 </template>
 
 <script>
 import Navbar from './components/NavbarDefault.vue'
+import Hero from './components/HeroBanner.vue'
 
 export default {
   name: 'App',
   components: {
-    Navbar
+    Navbar,
+    Hero
   }
 }
 </script>
@@ -18,6 +21,10 @@ export default {
 <style>
 @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600,700&display=swap');
+
+a:hover {
+  text-decoration: none;
+}
 
 #app {
   font-family: 'Montserrat', sans-serif, Arial, sans-serif;
