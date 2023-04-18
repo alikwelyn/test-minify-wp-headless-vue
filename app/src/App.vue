@@ -1,28 +1,67 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Navbar />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Navbar from './components/NavbarDefault.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Navbar
   }
 }
 </script>
 
 <style>
+@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600,700&display=swap');
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
+
+.button-default {
+  color: #fff;
+  background-color: #DA2828;
+  border: 2px solid #DA2828;
+  font-size: 13px;
+  font-weight: 700;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 12px 20px;
+}
+.button-default:focus,
+.button-default.focus {
+  color: #DA2828;
+  background-color: transparent;
+  border: 2px solid #DA2828;
+}
+.button-default:hover {
+  color: #DA2828;
+  background-color: transparent;
+  border: 2px solid #DA2828;
+}
+.button-default:active,
+.button-default.active {
+  color: #DA2828;
+  background-color: transparent;
+  border: 2px solid #DA2828;
+}
+.button-default:active:hover,
+.button-default.active:hover,
+.button-default:active:focus,
+.button-default.active:focus,
+.button-default:active.focus,
+.button-default.active.focus {
+  color: #DA2828;
+  background-color: transparent;
+  border: 2px solid #DA2828;
+}
+
 </style>
