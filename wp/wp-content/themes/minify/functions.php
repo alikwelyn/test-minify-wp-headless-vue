@@ -13,5 +13,5 @@ add_action( 'init', 'register_menus' );
 function title_and_thumbs() {
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'post-thumbnails' );
-  }
+}
 add_action( 'after_setup_theme', 'title_and_thumbs' );

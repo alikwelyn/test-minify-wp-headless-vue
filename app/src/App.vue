@@ -26,7 +26,7 @@ export default {
 
 <style>
 @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
 body{
   background-color: #F5F5F5;

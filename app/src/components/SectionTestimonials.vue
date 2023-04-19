@@ -9,7 +9,7 @@
             <p class="subtext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Est nunc.</p>
           </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4" v-for="testimonial in testimonials" :key="testimonial.id">
           <div class="card">
             <div class="card-header">
               <svg width="48" height="38" viewBox="0 0 48 38" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -17,12 +17,12 @@
               </svg>
             </div>
             <div class="card-body">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sem purus bibendum rhoncus ut tortor etiam turpis. Vitae varius nunc, pulvinar elementum. Sed sit euismod dui id velit eu amet accumsan blandit. Posuere ac sed gravida nibh tristique elit volutpat ac. Vulputate mauris hac eget ipsum. In id gravida laoreet in aliquet. </p>
+              <p>{{ testimonial.text }}</p>
             </div>
             <div class="card-footer">
-              <img src="@/assets/thiago-franca.jpg" alt="Thiago França">
-              <h6>Thiago França</h6>
-              <span>Jac J3 2013</span>
+              <img :src="testimonial.image" alt="Thiago França">
+              <h6>{{ testimonial.author }}</h6>
+              <span>{{ testimonial.car }}</span>
             </div>
           </div>
         </div>
@@ -32,8 +32,42 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  name: 'SectionTestimonials'
+  name: 'SectionTestimonials',
+  data() {
+    return {
+      testimonials: []
+    }
+  },
+  mounted() {
+    axios.get(`${process.env.VUE_APP_API_URL}/depoimentos?orderby=date&order=asc`)
+      .then(response => {
+        const testimonialRequests = response.data.map(testimonial => {
+          const mediaUrl = `${process.env.VUE_APP_API_URL}/media/${testimonial.featured_media}`;
+
+          return axios.get(mediaUrl)
+            .then(mediaResponse => {
+              return {
+                id: testimonial.id,
+                text: testimonial.content.rendered.replace(/<\/?p>/g, ''),
+                image: mediaResponse.data.source_url,
+                author: testimonial.title.rendered,
+                car: testimonial.acf.carro
+              };
+            });
+        });
+
+        Promise.all(testimonialRequests)
+          .then(testimonials => {
+            this.testimonials = testimonials;
+          });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  },
 }
 </script>
 
@@ -75,8 +109,7 @@ export default {
   border: 1px solid #ECECEC;
   box-shadow: 0px 10px 32px rgba(0, 0, 0, 0.16);
   border-radius: 8px;
-  margin-left: auto;
-  z-index: 1;
+  min-height: 435px;
 }
 .testimonials .card .card-header {
   padding: 40px 156px 32px 156px;
