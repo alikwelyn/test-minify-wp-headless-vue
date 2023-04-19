@@ -4,6 +4,7 @@
     <Hero />
     <SectionOne />
     <Testimonials />
+    <Footer />
   </div>
 </template>
 
@@ -11,7 +12,8 @@
 import Navbar from './components/NavbarDefault'
 import Hero from './components/HeroBanner'
 import SectionOne from './components/SectionOne'
-import Testimonials from './components/SectionTestimonials.vue'
+import Testimonials from './components/SectionTestimonials'
+import Footer from './components/FooterDefault'
 
 export default {
   name: 'App',
@@ -19,7 +21,8 @@ export default {
     Navbar,
     Hero,
     SectionOne,
-    Testimonials
+    Testimonials,
+    Footer,
   }
 }
 </script>
