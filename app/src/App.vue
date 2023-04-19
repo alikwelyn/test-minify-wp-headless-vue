@@ -3,6 +3,7 @@
     <Navbar />
     <Hero />
     <SectionOne />
+    <Testimonials />
   </div>
 </template>
 
@@ -10,13 +11,15 @@
 import Navbar from './components/NavbarDefault'
 import Hero from './components/HeroBanner'
 import SectionOne from './components/SectionOne'
+import Testimonials from './components/SectionTestimonials.vue'
 
 export default {
   name: 'App',
   components: {
     Navbar,
     Hero,
-    SectionOne
+    SectionOne,
+    Testimonials
   }
 }
 </script>
