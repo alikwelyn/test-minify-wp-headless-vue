@@ -83,5 +83,14 @@ a:hover {
   background-color: transparent;
   border: 2px solid #DA2828;
 }
-
+.testimonials .swiper-pagination-bullet-active {
+  background: #DA2828 !important;
+  padding: 0 10px;
+}
+.testimonials .swiper-pagination-bullet {
+  background-color: #DA2828;
+  width: 12px;
+  height: 12px;
+  border-radius: 30px;
+}
 </style>

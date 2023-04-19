@@ -3,28 +3,31 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12">
-          <div class="content">
-            <p class="name">Depoimentos</p>
-            <h4>Congue viverra quam dui.</h4>
-            <p class="subtext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Est nunc.</p>
-          </div>
+            <div class="content">
+                <p class="name">Depoimentos</p>
+                <h4>Congue viverra quam dui.</h4>
+                <p class="subtext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Est nunc.</p>
+            </div>
         </div>
-        <div class="col-lg-4" v-for="testimonial in testimonials" :key="testimonial.id">
-          <div class="card">
-            <div class="card-header">
-              <svg width="48" height="38" viewBox="0 0 48 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 15.6574V5.27778C0 1.75926 1.58824 0 4.76471 0H14.6471C17.8235 0 19.4118 1.75926 19.4118 5.27778V22.6944C19.4118 26.0957 18.7647 28.9691 17.4706 31.3148C16.1765 33.5432 14.6471 35.0679 12.8824 35.8889C9.82353 37.2963 7.47059 38 5.82353 38H2.82353L0.882351 37.6482V31.4907H1.23529C5 31.4907 6.88235 29.4383 6.88235 25.3333V20.5833H4.76471C1.58824 20.5833 0 18.9414 0 15.6574ZM28.5882 15.6574V5.27778C28.5882 1.75926 30.2353 0 33.5294 0H43.4118C46.4706 0 48 1.75926 48 5.27778V22.6944C48 26.0957 47.3529 28.9691 46.0588 31.3148C44.8824 33.5432 43.3529 35.0679 41.4706 35.8889C38.4118 37.2963 36.0588 38 34.4118 38H31.5882L29.6471 37.6482V31.4907H30C33.7647 31.4907 35.6471 29.4383 35.6471 25.3333V20.5833H33.5294C30.2353 20.5833 28.5882 18.9414 28.5882 15.6574Z" fill="#DA2828"/>
-              </svg>
+        <div class="col-lg-12">
+            <div ref="swiper" class="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" v-for="testimonial in testimonials" :key="testimonial.id">
+                        <div class="card">
+                            <div class="card-header"></div>
+                            <div class="card-body">
+                                <p>{{ testimonial.text }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <img :src="testimonial.image" alt="Thiago França">
+                                <h6>{{ testimonial.author }}</h6>
+                                <span>{{ testimonial.car }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-              <p>{{ testimonial.text }}</p>
-            </div>
-            <div class="card-footer">
-              <img :src="testimonial.image" alt="Thiago França">
-              <h6>{{ testimonial.author }}</h6>
-              <span>{{ testimonial.car }}</span>
-            </div>
-          </div>
+            <div class="swiper-pagination"></div>
         </div>
       </div>
     </div>
@@ -33,47 +36,68 @@
 
 <script>
 import axios from 'axios';
+import Swiper, { Pagination } from 'swiper'
+import 'swiper/swiper-bundle.min.css'
+
 
 export default {
-  name: 'SectionTestimonials',
-  data() {
-    return {
-      testimonials: []
-    }
-  },
-  mounted() {
-    axios.get(`${process.env.VUE_APP_API_URL}/depoimentos?orderby=date&order=asc`)
-      .then(response => {
-        const testimonialRequests = response.data.map(testimonial => {
-          const mediaUrl = `${process.env.VUE_APP_API_URL}/media/${testimonial.featured_media}`;
+    name: 'SectionTestimonials',
+    data() {
+        return {
+        testimonials: [],
+        activeIndex: 0
+        }
+    },
+    mounted() {
+        axios.get(`${process.env.VUE_APP_API_URL}/depoimentos?orderby=date&order=asc`)
+        .then(response => {
+            const testimonialRequests = response.data.map(testimonial => {
+                const mediaUrl = `${process.env.VUE_APP_API_URL}/media/${testimonial.featured_media}`;
 
-          return axios.get(mediaUrl)
-            .then(mediaResponse => {
-              return {
-                id: testimonial.id,
-                text: testimonial.content.rendered.replace(/<\/?p>/g, ''),
-                image: mediaResponse.data.source_url,
-                author: testimonial.title.rendered,
-                car: testimonial.acf.carro
-              };
+                return axios.get(mediaUrl)
+                    .then(mediaResponse => {
+                        return {
+                            id: testimonial.id,
+                            text: testimonial.content.rendered.replace(/<\/?p>/g, ''),
+                            image: mediaResponse.data.source_url,
+                            author: testimonial.title.rendered,
+                            car: testimonial.acf.carro
+                        };
+                    });
             });
-        });
 
-        Promise.all(testimonialRequests)
-          .then(testimonials => {
-            this.testimonials = testimonials;
-          });
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  },
+            Promise.all(testimonialRequests)
+                .then(testimonials => {
+                    this.testimonials = testimonials;
+                })
+                .then(() => {
+                    new Swiper(this.$refs.swiper, {
+                        modules: [Pagination],
+                        lazy: true,
+                        slidesPerView: 3,
+                        spaceBetween: 29,
+                        pagination: {
+                            el: '.swiper-pagination',
+                            clickable: true,
+                        },
+                        on: {
+                            slideChange: (swiper) => {
+                                this.activeIndex = swiper.realIndex
+                            },
+                        },
+                    });
+                });
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    },
 }
 </script>
 
 <style scoped>
 .testimonials {
-  padding: 72px 55px;
+  padding: 72px 55px 156px 55px;
   background: url("@/assets/testimonials-bg.svg") no-repeat;
   background-size: contain;
   background-position: center bottom;
@@ -103,6 +127,18 @@ export default {
   font-weight: 400;
   margin-bottom: 27px;
   line-height: 24px;
+}
+.testimonials .swiper {
+  width: 100%;
+  height: 500px;
+}
+.testimonials .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.testimonials .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
+    bottom: -50px;
 }
 .testimonials .card {
   background: #FFFFFF;
