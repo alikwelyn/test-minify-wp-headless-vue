@@ -113,4 +113,25 @@ footer .copyright .social-links a:hover {
 footer .copyright .links{
   text-align: right;
 }
+@media (min-width: 320px) and (max-width: 480px) {
+footer {
+  padding: 40px 20px;
+  text-align: center;
+}
+footer .phone-info{
+  text-align: center;
+}
+footer .phone-info span {
+  margin: 0 auto;
+}
+footer .phone-info h4.phone {
+  margin: 0 auto 20px auto;
+}
+footer .copyright .social-links {
+  margin: 10px 0;
+}
+footer .copyright .links{
+  text-align: center;
+}
+}
 </style>

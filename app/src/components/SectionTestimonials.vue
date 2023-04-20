@@ -74,11 +74,21 @@ export default {
                     new Swiper(this.$refs.swiper, {
                         modules: [Pagination],
                         lazy: true,
-                        slidesPerView: 3,
                         spaceBetween: 29,
                         pagination: {
                             el: '.swiper-pagination',
                             clickable: true,
+                        },
+                        breakpoints: {
+                            480: {
+                                slidesPerView: 1
+                            },
+                            768: {
+                                slidesPerView: 2,
+                            },
+                            1024: {
+                                slidesPerView: 3,
+                            }
                         },
                         on: {
                             slideChange: (swiper) => {
@@ -130,7 +140,7 @@ export default {
 }
 .testimonials .swiper {
   width: 100%;
-  height: 500px;
+  height: 550px;
 }
 .testimonials .swiper-slide {
   display: flex;
@@ -145,7 +155,7 @@ export default {
   border: 1px solid #ECECEC;
   box-shadow: 0px 10px 32px rgba(0, 0, 0, 0.16);
   border-radius: 8px;
-  min-height: 435px;
+  min-height: 466px;
 }
 .testimonials .card .card-header {
   padding: 40px 156px 32px 156px;
@@ -185,5 +195,39 @@ export default {
   font-size: 12px;
   font-weight: 400;
   line-height: 14.63px;
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+.testimonials .swiper {
+  height: 580px;
+}
+.testimonials .card {
+  min-height: 500px;
+}
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+.testimonials .swiper {
+  height: 680px;
+}
+.testimonials .card {
+  min-height: 600px;
+}
+}
+@media (min-width: 320px) and (max-width: 480px) {
+.testimonials {
+    padding: 35px 20px 156px 20px;
+}
+.testimonials .content h4 {
+    font-size: 34px;
+    line-height: 34px;
+}
+.testimonials .swiper {
+    width: 100%;
+    height: 580px;
+}
+.testimonials .card {
+    box-shadow: 0px 10px 32px rgba(0, 0, 0, 0);
+    min-height: 520px;
+}
 }
 </style>

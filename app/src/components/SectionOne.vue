@@ -78,5 +78,36 @@ export default {
 }
 .sectionOne img {
   margin-left: auto;
+  width: 100%;
+}
+@media (min-width: 1025px) and (max-width: 1280px) {
+.sectionOne .content {
+  max-width: 80%;
+}
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+.sectionOne .content {
+  max-width: 80%;
+}
+.sectionOne .content h3 {
+  font-size: 26px;
+}
+.sectionOne .content p {
+  font-size: 14px;
+}
+.sectionOne li {
+  font-size: 14px;
+}
+}
+@media (min-width: 320px) and (max-width: 480px) {
+.sectionOne {
+  padding: 35px 20px;
+}
+.sectionOne .content {
+  max-width: 100%;
+}
+.sectionOne img {
+  margin: 50px auto 0 auto;
+}
 }
 </style>

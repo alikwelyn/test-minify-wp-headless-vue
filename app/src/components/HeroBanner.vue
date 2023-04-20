@@ -2,14 +2,14 @@
   <header class="hero">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-6 order-2 order-lg-1">
+        <div class="col-lg-6">
           <div class="content">
             <h2>Lorem ipsum sit amet dolor lorem ipsum sit amet...</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum ut.</p>
             <a href="#">Saiba mais</a>
           </div>
         </div>
-        <div class="col-lg-6 order-1 order-lg-2">
+        <div class="col-lg-6">
           <div class="card">
             <div class="card-header">
               <h5 class="card-title">Ornare ante sapien risus nulla.</h5>
@@ -89,6 +89,9 @@ export default {
   font-weight: 700;
 }
 .hero .card {
+  position: absolute;
+  right: 10px;
+  top: -20px;
   background: #FFFFFF;
   border: 1px solid #ECECEC;
   box-shadow: 0px 10px 32px rgba(0, 0, 0, 0.16);
@@ -132,5 +135,47 @@ export default {
   font-size: 13px;
   font-weight: 400;
   line-height: 21px;
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+.hero .content {
+  max-width: 80%;
+}
+.hero .content h2 {
+  margin-top: 10px;
+  margin-bottom: 24px;
+}
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+.hero .content {
+  max-width: 80%;
+}
+.hero .content h2 {
+  font-size: 35px;
+}
+.hero .content p {
+  font-size: 16px;
+}
+}
+@media (min-width: 320px) and (max-width: 480px) {
+.hero {
+  padding: 50px 20px;
+}
+.hero .content {
+  max-width: 100%;
+}
+.hero .content h2 {
+  font-size: 32px;
+  margin-top: 0px;
+}
+.hero .content p {
+  font-size: 16px;
+}
+.hero .card {
+  position: relative;
+  right: 0px;
+  top: 0px;
+  margin: 20px auto;
+}
 }
 </style>

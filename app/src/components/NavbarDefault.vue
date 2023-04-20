@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg">
     <a class="navbar-brand" href="#">Teste front</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
@@ -79,5 +79,28 @@ ul.navbar-nav {
 }
 .navbar ul li a.button-default {
   color: #fff;
+}
+@media (min-width: 320px) and (max-width: 480px) {
+.navbar {
+  padding: 10px 20px;
+}
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(218, 40, 40, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+.custom-toggler.navbar-toggler {
+  border-color: #DA2828;
+} 
+ul.navbar-nav {
+  align-items: flex-start;
+}
+.navbar li {
+  margin: 0;
+}
+.navbar ul li a.phone{
+  display: none;
+}
+.navbar ul li a.button-default {
+  display: none;
+}
 }
 </style>
